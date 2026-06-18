@@ -1,46 +1,77 @@
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPMB</title>
-  <link rel="icon" href="https://mentariilmu.org/logo.png" />
+
+  <link rel="icon" href="https://mentariilmu.org/logo.png">
+
   <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
     html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #eee;
-      overflow: hidden;
-      /* Mencegah scroll ganda */
+    body{
+      width:100%;
+      height:100%;
+      overflow:hidden;
+      background:#ffffff;
+      font-family:Arial, sans-serif;
     }
 
-    .iframe-container {
-      width: 100%;
-      height: 100dvh;
-      /* Menggunakan dvh agar pas di mobile browser */
-      overflow: hidden;
+    #loader{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:#fff;
+      z-index:9999;
+      color:#184c47;
+      font-size:18px;
+      font-weight:600;
     }
 
-    iframe {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border: none;
+    iframe{
+      width:100%;
+      height:100vh;
+      border:none;
     }
   </style>
 </head>
-
 <body>
-  <div class="iframe-container">
-    <iframe id="app" src="https://forms.gle/QkhL4SfovVjRC1cC6" scrolling="yes" allowfullscreen="true"
-      webkitallowfullscreen="true" mozallowfullscreen="true"
-      allow="fullscreen; camera; microphone; display-capture; geolocation;">
-    </iframe>
-  </div>
-</body>
 
+<div id="loader">
+  Memuat Formulir SPMB...
+</div>
+
+<iframe
+  id="formFrame"
+  src="https://docs.google.com/forms/d/e/1FAIpQLScNQAc6w9FlcmWagivW1zYSEwUlYQszXr5K_xoeyHIdiK1cUA/viewform?embedded=true"
+  loading="lazy"
+  allowfullscreen>
+</iframe>
+
+<script>
+  const frame = document.getElementById('formFrame');
+  const loader = document.getElementById('loader');
+
+  frame.onload = () => {
+    loader.style.display = 'none';
+  };
+
+  // Fallback jika event load tidak terdeteksi
+  setTimeout(() => {
+    loader.style.display = 'none';
+  }, 3000);
+</script>
+
+</body>
 </html>
